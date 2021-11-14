@@ -1,5 +1,7 @@
 from flask import Flask
 
+from app.configs.extensions import db
+
 
 def update_extensions(app: Flask):
     """
@@ -24,6 +26,7 @@ def create_app(config_object="app.configs"):
 
     app = Flask("HealthEat")
     app.config.from_object(config_object)
+    db.init_app(app)
     update_extensions(app)
 
     return app
