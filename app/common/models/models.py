@@ -1,3 +1,5 @@
+from flask_user import UserMixin
+
 from app.common.helpers.enums import Roles as RoleEnum
 from app.configs.extensions import db
 
@@ -6,7 +8,7 @@ class BaseModel(db.Model):
     __abstract__ = True
 
 
-class User(BaseModel):
+class User(BaseModel, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)

@@ -1,9 +1,11 @@
 from flask import Flask
 
 from app.configs.extensions import db
+from app.src.auth import auth_bp
+from app.src.user_manager import register_user_manager
 
 
-def update_extensions(app: Flask):
+def register_extensions(app: Flask):
     """
     A method to add the common extensions to the app instance
 
@@ -14,19 +16,21 @@ def update_extensions(app: Flask):
     :return: app object with extensions
     """
 
+    register_user_manager(app, db)
+
+    return app
+
+
+def update_blueprints(app: Flask):
+    app.register_blueprint(auth_bp)
     return app
 
 
 def create_app(config_object="app.configs"):
-    """
-    Initialize the flask application
-    :param config_object:
-    :return:
-    """
-
     app = Flask("HealthEat")
     app.config.from_object(config_object)
     db.init_app(app)
-    update_extensions(app)
+    register_extensions(app)
+    update_blueprints(app)
 
     return app
