@@ -14,11 +14,11 @@ class RegisterForm(Form):
             validators.Regexp(
                 r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$",
                 message="Password must contain at least:"
-                        "<ul>"
-                        "<li>8 symbols</li>"
-                        "<li>1 letter</li>"
-                        "<li>1 digit</li>"
-                        "</ul>",
+                "<ul>"
+                "<li>8 symbols</li>"
+                "<li>1 letter</li>"
+                "<li>1 digit</li>"
+                "</ul>",
             ),
             validators.DataRequired(),
         ],

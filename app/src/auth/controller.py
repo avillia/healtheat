@@ -5,11 +5,7 @@ from app.common.models import User
 from app.configs.extensions import db
 from app.src.auth.view import LoginForm, RegisterForm
 
-auth_bp = Blueprint(
-    'auth',
-    __name__,
-    template_folder="../templates"
-)
+auth_bp = Blueprint("auth", __name__, template_folder="../templates")
 
 
 @auth_bp.route("/sign-up", methods=["GET"])
@@ -32,7 +28,7 @@ def sign_up():
             User(
                 username=form.username.data,
                 password=form.password.data,
-                role_name=Roles.user
+                role_name=Roles.user,
             )
         )
 
