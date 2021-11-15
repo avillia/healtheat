@@ -12,7 +12,7 @@ class User(BaseModel, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), unique=True)
+    username = db.Column(db.String(64, collation='NOCASE'), unique=True)
     password = db.Column(db.String(256))
     role_name = db.Column(db.ForeignKey("user_roles.name"))
 
