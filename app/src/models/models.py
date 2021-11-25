@@ -12,9 +12,9 @@ class User(BaseModel, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(63, collation='NOCASE'), unique=True)
-    password = db.Column(db.String(255), nullable=False, server_default='')
-    active = db.Column(db.Boolean(), nullable=False, server_default='0')
+    username = db.Column(db.String(64), unique=True)
+    password = db.Column(db.String(256), nullable=False, server_default="")
+    active = db.Column(db.Boolean(), nullable=False, server_default="0")
     role_name = db.Column(db.ForeignKey("user_roles.name"))
 
     role = db.relationship("Role", back_populates="users")
@@ -25,7 +25,7 @@ class User(BaseModel, UserMixin):
     )
     saved_recipes = db.relationship(
         "SavedRecipes",
-        primaryjoin="SavedRecipes,user_id == User.id",
+        primaryjoin="SavedRecipes.user_id == User.id",
         back_populates="user",
     )
 
@@ -34,7 +34,7 @@ class Role(BaseModel):
     __tablename__ = "user_roles"
 
     name = db.Column(db.Enum(RoleEnum), primary_key=True)
-    can_manage_user_data = db.Column(db.Boolean)
+    can_manage_users_data = db.Column(db.Boolean)
     can_manage_medical_info = db.Column(db.Boolean)
 
     users = db.relationship("User", back_populates="role")
@@ -50,12 +50,12 @@ class Illness(BaseModel):
 
     userillnesses = db.relationship(
         "UserIllness",
-        primaryjoin="UserIllness.illness_id = Illness.id",
+        primaryjoin="UserIllness.illness_id == Illness.id",
         back_populates="illness",
     )
     recipeillnesses = db.relationship(
         "RecipeIllness",
-        primaryjoin="RecipeIllness.illness_id = Illness.id",
+        primaryjoin="RecipeIllness.illness_id == Illness.id",
         back_populates="illness",
     )
 
@@ -85,12 +85,12 @@ class Recipe(BaseModel):
 
     recipeillnesses = db.relationship(
         "RecipeIllness",
-        primaryjoin="RecipeIllness.illness_id = Illness.id",
+        primaryjoin="RecipeIllness.illness_id == Illness.id",
         back_populates="recipe",
     )
     saved_recipes = db.relationship(
         "SavedRecipes",
-        primaryjoin="SavedRecipes.illness_id = Illness.id",
+        primaryjoin="SavedRecipes.illness_id == Illness.id",
         back_populates="recipe",
     )
 
