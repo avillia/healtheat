@@ -1,7 +1,7 @@
 from flask_user import UserMixin
 
-from app.common.helpers.enums import Roles as RoleEnum
 from app.configs.extensions import db
+from app.src.helpers.enums import Roles as RoleEnum
 
 
 class BaseModel(db.Model):
@@ -12,8 +12,9 @@ class User(BaseModel, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64, collation='NOCASE'), unique=True)
-    password = db.Column(db.String(256))
+    username = db.Column(db.String(63, collation='NOCASE'), unique=True)
+    password = db.Column(db.String(255), nullable=False, server_default='')
+    active = db.Column(db.Boolean(), nullable=False, server_default='0')
     role_name = db.Column(db.ForeignKey("user_roles.name"))
 
     role = db.relationship("Role", back_populates="users")
