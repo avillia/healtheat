@@ -1,8 +1,8 @@
 from flask import Flask
 
 from app.configs.extensions import db
-from app.src.user_manager import register_user_manager
-from views.index import index_bp
+from app.src.modules.user_manager import register_user_manager
+from app.src.views import index_bp
 
 
 def register_extensions(app: Flask):
@@ -21,15 +21,25 @@ def register_extensions(app: Flask):
     return app
 
 
+def initialize_db(app: Flask):
+
+    db.init_app(app)
+    db.create_all(app=app)
+
+    return app
+
+
 def update_blueprints(app: Flask):
+
     app.register_blueprint(index_bp)
+
     return app
 
 
 def create_app(config_object="app.configs"):
     app = Flask("HealthEat", static_folder="app/src/static")
     app.config.from_object(config_object)
-    db.init_app(app)
+    initialize_db(app)
     register_extensions(app)
     update_blueprints(app)
 
