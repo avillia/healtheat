@@ -85,12 +85,12 @@ class Recipe(BaseModel):
 
     recipeillnesses = db.relationship(
         "RecipeIllness",
-        primaryjoin="RecipeIllness.illness_id == Illness.id",
+        primaryjoin="RecipeIllness.recipe_id == Recipe.id",
         back_populates="recipe",
     )
     saved_recipes = db.relationship(
         "SavedRecipes",
-        primaryjoin="SavedRecipes.illness_id == Illness.id",
+        primaryjoin="SavedRecipes.recipe_id == Recipe.id",
         back_populates="recipe",
     )
 
