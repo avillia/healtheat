@@ -1,7 +1,7 @@
 from flask_admin.contrib.sqla import ModelView
 
-from app.configs.extensions import db
 from app.src.models import Illness, Recipe, Role, User
+from extensions import db
 
 
 class RecipeView(ModelView):

@@ -1,7 +1,7 @@
 from flask_user import UserMixin
 
-from app.configs.extensions import db
 from app.src.helpers.enums import Roles as RoleEnum
+from extensions import db
 
 
 class BaseModel(db.Model):
