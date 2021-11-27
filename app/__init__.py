@@ -1,8 +1,7 @@
 from flask import Flask
 
-from app.configs.extensions import db
-from app.src.modules.user_manager import register_user_manager
-from app.src.views import index_bp
+from app.configs.extensions import db, register_user_manager
+from app.src.views import admin_bp, index_bp
 
 
 def register_extensions(app: Flask):
@@ -17,6 +16,8 @@ def register_extensions(app: Flask):
     """
 
     register_user_manager(app, db)
+
+    admin_bp.init_app(app)
 
     return app
 
