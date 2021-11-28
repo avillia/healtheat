@@ -1,6 +1,8 @@
 from flask import Flask
 
-from app.src.extensions import db, register_admin, register_user_manager
+from app.src.extensions.admin import register_admin
+from app.src.extensions.sqlalchemy import db
+from app.src.extensions.user_manager import register_user_manager
 from app.src.views import index_bp
 
 

@@ -1,7 +1,7 @@
 from flask_user import UserMixin
 
 from app.src.helpers.enums import Roles as RoleEnum
-from extensions import db
+from extensions.sqlalchemy import db
 
 
 class BaseModel(db.Model):
@@ -98,6 +98,7 @@ class Recipe(BaseModel):
 class RecipeIllness(BaseModel):
     __tablename__ = "recipes_for_illnesses"
 
+    id = db.Column(db.Integer, primary_key=True)
     recipe_id = db.Column(
         db.ForeignKey("recipes.id", ondelete="CASCADE", onupdate="CASCADE"),
         primary_key=True,
