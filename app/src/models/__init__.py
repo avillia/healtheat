@@ -1,1 +1,2 @@
-from .models import Illness, Recipe, Role, User, RecipeIllness, SavedRecipes, UserIllness
+from .associative import RecipeIllness, SavedRecipes, UserIllness
+from .main import Illness, Recipe, Role, User
