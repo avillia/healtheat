@@ -2,6 +2,7 @@ from flask_user import UserMixin
 
 from app.src.extensions.sqlalchemy import db
 from app.src.helpers.enums import Roles as RoleEnum
+from .managers import UserManager, IllnessManager, RecipeManager
 
 
 class BaseModel(db.Model):
@@ -10,6 +11,8 @@ class BaseModel(db.Model):
 
 class User(BaseModel, UserMixin):
     __tablename__ = "users"
+
+    query_class = UserManager
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True)
@@ -40,6 +43,8 @@ class Role(BaseModel):
 class Illness(BaseModel):
     __tablename__ = "illnesses"
 
+    query_class = IllnessManager
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), unique=True)
 
@@ -54,9 +59,12 @@ class Illness(BaseModel):
 class Recipe(BaseModel):
     __tablename__ = "recipes"
 
+    query_class = RecipeManager
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
-    is_verified = db.Column(db.String(64))
+    is_verified = db.Column(db.Boolean)
+    preview = db.Column(db.String(256))
     ingredients = db.Column(db.Text)
     description = db.Column(db.Text)
     advices = db.Column(db.Text)
