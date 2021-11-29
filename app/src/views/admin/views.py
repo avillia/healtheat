@@ -4,15 +4,23 @@ from app.src.extensions.sqlalchemy import db
 from app.src.models import Illness, Recipe, Role, User
 
 
-class RecipeView(ModelView):
-    pass
-
-
 class IllnessView(ModelView):
     pass
 
 
-user_view = ModelView(User, db.session)
-role_view = ModelView(Role, db.session)
-recipe_view = RecipeView(Recipe, db.session)
+class RecipeView(ModelView):
+    pass
+
+
+class RoleView(ModelView):
+    pass
+
+
+class UserView(ModelView):
+    pass
+
+
 illness_view = IllnessView(Illness, db.session)
+recipe_view = RecipeView(Recipe, db.session)
+role_view = RoleView(Role, db.session)
+user_view = UserView(User, db.session)
