@@ -1,18 +1,11 @@
 from flask_user import UserMixin
 
 from app.src.extensions.sqlalchemy import db
-from app.src.models.main import BaseManager, BaseModel
-
-
-class UserManager(BaseManager):
-    pass
+from app.src.models.main import BaseModel
 
 
 class User(BaseModel, UserMixin):
     __tablename__ = "users"
-
-    query_class = UserManager
-    query: UserManager  # need this to resolve "unresolved attribute" warning in PyCharm
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True)

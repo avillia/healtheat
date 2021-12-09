@@ -1,17 +1,10 @@
 from app.src.extensions.sqlalchemy import db
 from app.src.helpers.enums import Roles as RoleEnum
-from app.src.models.main import BaseManager, BaseModel
-
-
-class RoleManager(BaseManager):
-    pass
+from app.src.models.main import BaseModel
 
 
 class Role(BaseModel):
     __tablename__ = "user_roles"
-
-    query_class = RoleManager
-    query: RoleManager  # need this to resolve "unresolved attribute" warning in PyCharm
 
     name = db.Column(db.Enum(RoleEnum), primary_key=True)
     can_manage_users_data = db.Column(db.Boolean)
